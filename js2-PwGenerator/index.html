@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="cont">
+        <form class="xform">
+            <h2 class="heading">Password Generator</h2>
+            <div class="xpwlen">
+                <label for="pwlen" class="xlabel">Password length:</label>
+                <input id="pwlen" type="number" class="xinput">
+            </div>
+            <div class="radio">
+                <input type="radio" id="upper" name="pwOption" value="Upper">
+                <label for="upper">Include Uppercase Letters</label><br>
+                <input type="radio" id="lower" name="pwOption" value="Lower">
+                <label for="lower">Include Lowercase Letters</label><br>
+                <input type="radio" id="num" name="pwOption" value="Numbers">
+                <label for="num">Include Numbers</label><br>
+                <input type="radio" id="symbols" name="pwOption" value="Symbols">
+                <label for="symbols">Include Symbols</label>
+            </div>
+
+
+            <button class="xbtn" id="xbtns" type="submit" >Generate</button>  
+            <div id="result" hidden>
+            </div>
+        </form>
+        
+   </div>
+
+
+    <script src="./script.js"></script>
+</body>
+</html>
