@@ -10,31 +10,57 @@
     <body>
        <div class="cont">
             <form class="xform">
-                <div>
+                <div id="screen1">
                     <h2 class="heading">Screen 1</h2>
-                    <input id="name" type="text" class="xinput">   
-                    <button class="xbtn" id="xnext1" type="submit">Next</button>  
+                    <div class="scrn">
+                        <div class="input-holder">
+                            <input id="name" type="text" class="xinput">
+                            <label for="name" class="xlabel">Your Name</label>
+                        </div>   
+                        <button class="xbtn" id="xnext1" type="submit" style="width: 25%;">Next</button>
+                    </div>  
                 </div>
 
-                <div>
+                <div id="screen2" hidden>
                     <h2 class="heading">Screen 2</h2>
-                    <input id="name" type="text" class="xinput">
-                    <input type="radio" id="male">  
-                    <label for="male">Male</label>
-                    <input type="radio" id="female"> 
-                    <label for="female">Female</label>
-                    <input type="checkbox">
-                    <label for="subs">Subscribe to newsletter</label>
-                    <button class="xbtn" id="xprev2" type="submit">Previous</button> 
-                    <button class="xbtn" id="xnext2" type="submit">Next</button>  
+                    <div class="scrn">
+                        <div class="input-holder">
+                            <input id="email" type="text" class="xinput">
+                            <label for="email" class="xlabel">Email</label>
+                        </div>  
+                          
+                        <div class="radio-tick">
+                            <input type="radio" id="male">
+                            <label for="male">Male</label>
+                            <input type="radio" id="female"> 
+                            <label for="female">Female</label>
+                            
+                        </div>
+                        <div class="checkmark">
+                            <input type="checkbox" id="subs">
+                            <label for="subs">Subscribe to newsletter</label>
+                        </div>
+                        <div>
+                            <button class="xbtn" id="xprev2" type="submit" style="width: 25%;">Previous</button> 
+                            <button class="xbtn" id="xnext2" type="submit" style="width: 25%;">Next</button>
+                        </div> 
+                    </div>
+                     
                 
                 </div>
 
-                <div>
+                <div id="screen3" hidden>
                     <h2 class="heading">Screen 3</h2>
-                    <input id="comment" type="text" class="xinput">   
-                    <button class="xbtn xprev" type="submit">Previous</button> 
-                    <button class="xbtn" id="xsubmit" type="submit">Submit</button> 
+                    <div class="scrn">
+                        <div class="input-holder">
+                            <input id="comment" type="text" class="xinput">
+                            <label for="comment" class="xlabel">Comment on here</label>
+                        </div>     
+                        <div>
+                            <button class="xbtn xprev" type="submit" style="width: 25%;">Previous</button> 
+                            <button class="xbtn" id="xsubmit" type="submit" style="width: 25%;">Submit</button>
+                        </div> 
+                    </div>
                 </div>
 
             </form>
