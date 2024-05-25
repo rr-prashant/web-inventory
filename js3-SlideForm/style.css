@@ -26,8 +26,7 @@
 .xinput{
     height: 30px;
     border-radius: 5px;
-    border: 1px solid;
-    border-color: #dddbdb;
+    border: 1px solid #dddbdb;
     margin: 8px 0px;
 }
 
@@ -38,4 +37,46 @@
     border-radius: 5px;
     font-weight:bold;
     color: #fff;
+    margin-top: 10px;
 }
+
+.scrn{
+    display: flex;
+    flex-direction: column;
+}
+
+.radio-tick{
+    margin: 10px 0px;
+}
+
+.checkmark{
+    margin-bottom: 10px;
+}
+
+
+/* for input and labels */
+
+.input-holder {
+    position: relative;
+}
+
+.input-holder .xlabel {
+    position: absolute;
+    top: 10px; 
+    left: 5px; 
+    display: flex;
+    align-items: center;
+    color: #ccc;
+    font-size: 1rem;
+    transition: top 0.3s ease, font-size 0.3s ease;
+}
+
+.xinput:focus + .xlabel {
+    font-size: 0.88rem;
+    top: -15;
+}
+
+.xinput:focus {
+    border-color: #dddbdb; 
+}
+
