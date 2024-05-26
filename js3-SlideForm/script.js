@@ -1,12 +1,3 @@
-const name = document.getElementById("name");
-const email = document.getElementById("email");
-const message = document.getElementById("comment");
-const sub = document.getElementById("subs").checked;
-const male = document.getElementById("male").checked;
-const female = document.getElementById("female").checked;
-
-
-
 
 // buttons
 let prevBtn = document.getElementById("xprev");
@@ -55,3 +46,41 @@ prevBtn.addEventListener('click', (e)=>{
     tabCount--;
     displayTab(tabCount);
 })
+
+let userinfo = {}
+
+function actionButton(){
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const message = document.getElementById("comment").value;
+    const sub = document.getElementById("subs").checked;
+    const male = document.getElementById("male").checked;
+    const female = document.getElementById("female").checked;
+
+    var tabs = document.getElementsByClassName("screenTab");
+    if ( tabCount == 0 ){
+        userinfo.name = name;
+    }else if (tabCount == ( tabs.length - 1)){
+        userinfo.comment = message;
+        submitAction();
+    }else{
+        userinfo.email = email;
+        userinfo.subscription = "Subscribed";
+        if (male){
+            userinfo.gender = "male";
+
+        }
+        else{
+            userinfo.gender = "female";
+        }
+    }
+
+    const objToString = JSON.stringify(userinfo);
+    localStorage.setItem("userDetails", objToString);
+}
+
+// function submitAction(){
+//     var new_obj = JSON.parse(localStorage.getItem("userDetails"));
+
+//     alert()
+// }
