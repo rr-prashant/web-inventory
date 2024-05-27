@@ -12,6 +12,7 @@
     text-align: center;
 }
 .xform{
+    position: relative;
     display: flex;
     flex-direction: column;
     width: 25%;
@@ -53,6 +54,25 @@
     margin-bottom: 10px;
 }
 
+.resultPop{
+    position: absolute;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    padding: 30px;
+    width: 25%;
+    display: none;
+    top: 50;
+}
+
+.img1{
+    position: absolute;
+    right: 15;
+    top: 15;
+}
+
+.head{
+    margin: 20px 0px;
+}
 
 /* for input and labels */
 
