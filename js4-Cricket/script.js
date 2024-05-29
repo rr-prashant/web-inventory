@@ -2,6 +2,8 @@ const ball = document.getElementById("ball");
 
 let ballcount = 0;
 let TotalRun = 0;
+let wicket = 0;
+let overs = 0;
 ball.addEventListener('click', play);
 
 let score = [];
@@ -11,48 +13,48 @@ let score = [];
 function play(){
     let all_score = '123456NWO';
 
-    let bat = generateScore(all_score);
 
+    if (ballcount < 6){
+        let bat = generateScore(all_score);
+        livescore(bat);
 
-    // ball counter
-    if (bat == "N") {
-        if (ballcount > 0) {
-            ballcount--;
+        // runcounter
+        if (bat == "1") {
+            TotalRun += 1;
+        }else if (bat == "2") {
+            TotalRun += 2;
+            ballcount += 1;
+        }else if (bat == "3") {
+            TotalRun += 3;
+            ballcount += 1;
+        }else if (bat == "4") {
+            TotalRun += 4;
+            ballcount += 1;
+        }else if (bat == "5") {
+            TotalRun += 5;
+            ballcount += 1;
+        }else if (bat == "6") {
+            TotalRun += 6;
+            ballcount += 1;
+        }else if (bat == "N") {
+            TotalRun += 1;
+           
+        }else if (bat == "O"){
+            wicket += 1;
+            ballcount += 1;
         }
+
         
-    }else if (bat == "W") {
-        if (ballcount > 0) {
-            ballcount--;
-        }
     }else{
-        ballcount++;
+        ballcount = 0;
+        overs += 1;
     }
+        console.log('ball - ' + ballcount);
+        console.log('run - ' + TotalRun);
+        console.log('wicet - ' + wicket);
+        console.log('over - ' + overs);
 
-    livescore(bat);
-
-    // runcounter
-    if (bat == "1") {
-        TotalRun += 1;
-    }else if (bat == "2") {
-       TotalRun += 2;
-            
-    }else if (bat == "3") {
-        TotalRun += 3;
-    }else if (bat == "4") {
-       TotalRun += 4;
-    }else if (bat == "5") {
-        TotalRun += 5;
-    }else if (bat == "6") {
-        TotalRun += 6;
-    }else if (bat == "N") {
-        TotalRun += 1;
-    }
-
-    console.log('ball - ' + ballcount);
-    console.log('run - ' + TotalRun);
-
-
-    
+ 
     
 }
 
