@@ -1,14 +1,14 @@
 const ball = document.getElementById("ball");
 
 let ballcount = 0;
-let ballcount2 = 0;
 let TotalRun = 0;
 let wicket = 0;
-let overs = 0;
+let overs = 1;
 
 let TotalRun2 = 0;
-let wicket2 = 1200;
-let overs2 = 0;
+let wicket2 = 0;
+let overs2 = 1;
+let team2turn = false;
 
 ball.addEventListener('click', play);
 
@@ -23,7 +23,6 @@ function play(){
     if (wicket < 11){
         
         ballcount += 1;
-        ballcount2 = 0;
         
 
         // runcounter
@@ -62,53 +61,61 @@ function play(){
         }
         
     }else{
+        team2turn = true
         wicket2 = 0;
         live1.innerHTML = ``;
     }
     
     
-    if (wicket2 < 11 ){
-        ballcount = 0;
-        ballcount2 += 1;
-
-        if (ballcount2 <= 6){
-            if (bat == "1") {
-                TotalRun2 += 1;
-            }else if (bat == "2") {
-                TotalRun2 += 2;
-            }else if (bat == "3") {
-                TotalRun2 += 3;
-            }else if (bat == "4") {
-                TotalRun2 += 4;
-            }else if (bat == "5") {
-                TotalRun2 += 5;
-            }else if (bat == "6") {
-                TotalRun2 += 6;
-            }else if (bat == "N") {
-                TotalRun2 += 1;
-                if (ballcount > 0){
-                    ballcount -= 1;
+    if (team2turn == true) {
+        if (wicket2 < 11 ){
+            ballcount += 1;
+    
+            if (ballcount <= 6){
+                if (bat == "1") {
+                    TotalRun2 += 1;
+                }else if (bat == "2") {
+                    TotalRun2 += 2;
+                }else if (bat == "3") {
+                    TotalRun2 += 3;
+                }else if (bat == "4") {
+                    TotalRun2 += 4;
+                }else if (bat == "5") {
+                    TotalRun2 += 5;
+                }else if (bat == "6") {
+                    TotalRun2 += 6;
+                }else if (bat == "N") {
+                    TotalRun2 += 1;
+                    if (ballcount > 0){
+                        ballcount -= 1;
+                    }
+                }else if (bat == "W") {
+                    if (ballcount > 0){
+                        ballcount -= 1;
+                    }
                 }
-            }else if (bat == "W") {
-                if (ballcount > 0){
-                    ballcount -= 1;
+                else if (bat == "O"){
+                    wicket2 += 1;
                 }
+                livescore(bat);
+            }else{
+                ballcount = 0;
+                overs2 += 1;
+                live1.innerHTML = ``;
             }
-            else if (bat == "O"){
-                wicket2 += 1;
-            }
-            livescore(bat);
+            
         }else{
-            ballcount = 0;
-            overs2 += 1;
-            live1.innerHTML = ``;
+            if (wicket2 != 1200) {
+                live1.innerHTML = ``;
+            }
+            
         }
-    }else{
-        if (wicket2 != 1200) {
-            live1.innerHTML = ``;
-        }
-        
     }
+
+    updateScore(TotalRun, wicket, overs);
+    updateScore2(TotalRun2, wicket2, overs2);
+    
+    
     
         console.log('TEAM 1 ball - ' + ballcount);
         console.log('TEAM 1 run - ' + TotalRun);
@@ -140,7 +147,7 @@ function generateScore(s){
 function livescore(bat){
     let live1 = document.getElementById("score-image1");
     console.log("livescore in");
-    if (ballcount <= 6 || ballcount2 <= 6) {
+    if (ballcount <= 6) {
         console.log("livescore out");
         let imgTag = '';
         
@@ -167,4 +174,27 @@ function livescore(bat){
         // Append the image to the live1 element
         live1.innerHTML += imgTag;
     }
+}
+
+
+function updateScore(r, w, o){
+    let run1 = document.getElementById("run1");
+    let wicket1 = document.getElementById("wicket1");
+    let over1 = document.getElementById("over1");
+    
+    run1.innerHTML = `${r}`;
+    wicket1.innerHTML = `${w}`;
+    over1.innerHTML = `${o}`;
+
+}
+
+function updateScore2(r, w, o){
+    let run2 = document.getElementById("run2");
+    let wicket2 = document.getElementById("wicket2");
+    let over2 = document.getElementById("over2");
+    
+    run2.innerHTML = `${r}`;
+    wicket2.innerHTML = `${w}`;
+    over2.innerHTML = `${o}`;
+    
 }
