@@ -15,68 +15,70 @@ let team1turn = true;
 
 ball.addEventListener('click', play);
 
-let score = [];
-
-
-
+// when the ball is played this function is called
 function play(){
-    let all_score = 'O';
+    let all_score = '123456WNO'; // score from 1-6runs W=Wideball N=Noball O=Wicket/Out
     let bat = generateScore(all_score);
     let live1 = document.getElementById("score-image1");
-    if (wicket < 11){
-        team2turn = false;
-        ballcount += 1;
-        
-
-        // runcounter
-        if (ballcount <= 6) {
-            if (bat == "1") {
-                TotalRun += 1;
-            }else if (bat == "2") {
-                TotalRun += 2;
-            }else if (bat == "3") {
-                TotalRun += 3;
-            }else if (bat == "4") {
-                TotalRun += 4;
-            }else if (bat == "5") {
-                TotalRun += 5;
-            }else if (bat == "6") {
-                TotalRun += 6;
-            }else if (bat == "N") {
-                TotalRun += 1;
-                if (ballcount > 0){
-                    ballcount -= 1;
+    
+    // if team1 is playing 
+    if (team1turn == true) {
+        if (wicket < 11){ // this means team1 11players can bat and after 11thplayer is out then team 2 comes for innings
+            team2turn = false; // Making sure team 1 is playing
+            ballcount += 1; // each ball is counted after ball is played for team 1
+            
+    
+            // runcounter
+            if (ballcount <= 6) { // counting overs for team 1
+                // run is added to total runs with respective to what score did the batman scored 
+                if (bat == "1") {
+                    TotalRun += 1;
+                }else if (bat == "2") {
+                    TotalRun += 2;
+                }else if (bat == "3") {
+                    TotalRun += 3;
+                }else if (bat == "4") {
+                    TotalRun += 4;
+                }else if (bat == "5") {
+                    TotalRun += 5;
+                }else if (bat == "6") {
+                    TotalRun += 6;
+                }else if (bat == "N") {
+                    TotalRun += 1;
+                    if (ballcount > 0){
+                        ballcount -= 1;
+                    }
+                }else if (bat == "W") {
+                    if (ballcount > 0){
+                        ballcount -= 1;
+                    }
                 }
-            }else if (bat == "W") {
-                if (ballcount > 0){
-                    ballcount -= 1;
+                else if (bat == "O"){
+                    wicket += 1;
                 }
+                livescore(bat); // updating the scoreboard 
+    
+            }else{
+                ballcount = 0; // reseting ballcount after each over for team 1
+                overs += 1; // updating overs for team 1
+                live1.innerHTML = ``; // updating live score space
             }
-            else if (bat == "O"){
-                wicket += 1;
-            }
-            livescore(bat);
-
+            
         }else{
-            ballcount = 0;
-            overs += 1;
-            live1.innerHTML = ``;
-        }
-        
-    }else{
-        if (team1turn == true) {
-            live1.innerHTML = ``;
-            team1turn = false;
-            team2turn = true;
+            if (team1turn == true) { // if all player of team 1 are out then everythign is reset and then team1turn is turned false as team 2 will be starting innings
+                live1.innerHTML = ``;
+                team1turn = false;
+                team2turn = true;
+            }
         }
     }
     
-    
+    // if team2 is playing 
     if (team2turn == true) {
-        if (wicket2 < 11 ){
-            ballcount2 += 1;
+        if (wicket2 < 11 ){ // this means team1 11players can bat and after 11thplayer is out then gameover
+            ballcount2 += 1; // each ball is counted after ball is played for team 2
     
-            if (ballcount2 <= 6){
+            if (ballcount2 <= 6){ // counting overs for team 2
                 if (bat == "1") {
                     TotalRun2 += 1;
                 }else if (bat == "2") {
@@ -104,8 +106,8 @@ function play(){
                 }
                 livescore(bat);
             }else{
-                ballcount2 = 0;
-                overs2 += 1;
+                ballcount2 = 0; // reseting ballcount after each over for team 2
+                overs2 += 1; // updating overs for team 2
                 live1.innerHTML = ``;
             }
             
@@ -115,14 +117,15 @@ function play(){
         }
     }
 
-    updateScore(TotalRun, wicket, overs);
-    updateScore2(TotalRun2, wicket2, overs2);
+    updateScore(TotalRun, wicket, overs); // updating score for team 1 in scoreboard below
+    updateScore2(TotalRun2, wicket2, overs2); // updating score for team 2 in scoreboard below
 
 
- 
-    
+
 }
 
+
+// generates random score for batmens
 function generateScore(s){
     let score = '';
     if (score == '') {
@@ -134,7 +137,7 @@ function generateScore(s){
 }
 
 
-
+// updates the score image in the live bat section
 function livescore(bat){
     let live1 = document.getElementById("score-image1");
     console.log("livescore in");
@@ -167,7 +170,7 @@ function livescore(bat){
     }
 }
 
-
+// updates score of team 1
 function updateScore(r, w, o){
     let run1 = document.getElementById("run1");
     let wicket1 = document.getElementById("wicket1");
@@ -179,6 +182,7 @@ function updateScore(r, w, o){
 
 }
 
+// updates score of team 2
 function updateScore2(r, w, o){
     let run2 = document.getElementById("run2");
     let wicket2 = document.getElementById("wicket2");
