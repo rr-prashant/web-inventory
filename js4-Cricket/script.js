@@ -6,9 +6,12 @@ let wicket = 0;
 let overs = 1;
 
 let TotalRun2 = 0;
+let ballcount2 = 0;
 let wicket2 = 0;
 let overs2 = 1;
-let team2turn = false;
+let team2turn = true;
+let team1turn = true;
+
 
 ball.addEventListener('click', play);
 
@@ -21,7 +24,7 @@ function play(){
     let bat = generateScore(all_score);
     let live1 = document.getElementById("score-image1");
     if (wicket < 11){
-        
+        team2turn = false;
         ballcount += 1;
         
 
@@ -61,17 +64,19 @@ function play(){
         }
         
     }else{
-        team2turn = true
-        wicket2 = 0;
-        live1.innerHTML = ``;
+        if (team1turn == true) {
+            live1.innerHTML = ``;
+            team1turn = false;
+            team2turn = true;
+        }
     }
     
     
     if (team2turn == true) {
         if (wicket2 < 11 ){
-            ballcount += 1;
+            ballcount2 += 1;
     
-            if (ballcount <= 6){
+            if (ballcount2 <= 6){
                 if (bat == "1") {
                     TotalRun2 += 1;
                 }else if (bat == "2") {
@@ -86,12 +91,12 @@ function play(){
                     TotalRun2 += 6;
                 }else if (bat == "N") {
                     TotalRun2 += 1;
-                    if (ballcount > 0){
-                        ballcount -= 1;
+                    if (ballcount2 > 0){
+                        ballcount2 -= 1;
                     }
                 }else if (bat == "W") {
-                    if (ballcount > 0){
-                        ballcount -= 1;
+                    if (ballcount2 > 0){
+                        ballcount2 -= 1;
                     }
                 }
                 else if (bat == "O"){
@@ -99,34 +104,20 @@ function play(){
                 }
                 livescore(bat);
             }else{
-                ballcount = 0;
+                ballcount2 = 0;
                 overs2 += 1;
                 live1.innerHTML = ``;
             }
             
         }else{
-            if (wicket2 != 1200) {
-                live1.innerHTML = ``;
-            }
+            live1.innerHTML = ``;
             
         }
     }
 
     updateScore(TotalRun, wicket, overs);
     updateScore2(TotalRun2, wicket2, overs2);
-    
-    
-    
-        console.log('TEAM 1 ball - ' + ballcount);
-        console.log('TEAM 1 run - ' + TotalRun);
-        console.log('TEAM 1 wicket - ' + wicket);
-        console.log('TEAM 1 over - ' + overs);
 
-
-        console.log('TEAM 2 ball - ' + ballcount2);
-        console.log('TEAM 2 run - ' + TotalRun2);
-        console.log('TEAM 2 wicket - ' + wicket2);
-        console.log('TEAM 2 over - ' + overs2);
 
  
     
