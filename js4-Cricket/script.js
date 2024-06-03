@@ -17,15 +17,15 @@ ball.addEventListener('click', play);
 
 // when the ball is played this function is called
 function play(){
-    let gamestart = decider(wicket ,wicket2, TotalRun, TotalRun2);
+    let gamestart = decider(wicket,wicket2,TotalRun,TotalRun2);
     if (gamestart == true) {
-        let all_score = '123456WNO'; // score from 1-6runs W=Wideball N=Noball O=Wicket/Out
+        let all_score = '16O'; // score from 1-6runs W=Wideball N=Noball O=Wicket/Out
         let bat = generateScore(all_score);
         let live1 = document.getElementById("score-image1");
         
         // if team1 is playing 
         if (team1turn == true) {
-            if (wicket < 11){ // this means team1 11players can bat and after 11thplayer is out then team 2 comes for innings
+            if (wicket <= 10){ // this means team1 11players can bat and after 11thplayer is out then team 2 comes for innings
                 team2turn = false; // Making sure team 1 is playing
                 ballcount += 1; // each ball is counted after ball is played for team 1
                 
@@ -77,7 +77,10 @@ function play(){
         
         // if team2 is playing 
         if (team2turn == true) {
-            if (wicket2 < 11 ){ // this means team1 11players can bat and after 11thplayer is out then gameover
+            if (wicket2 <= 10 ){ // this means team1 11players can bat and after 11thplayer is out then gameover
+                match_result.innerHTML = `
+                <div>TEAM 2 - Batting</div>
+                `;
                 ballcount2 += 1; // each ball is counted after ball is played for team 2
         
                 if (ballcount2 <= 6){ // counting overs for team 2
@@ -124,10 +127,10 @@ function play(){
     }else{
 
         ball.innerHTML = `
-        <button class="btn btn-error border border-1 py-2 my-1 w-100">Ball</button>
+        <button class="btn btn-danger border border-1 py-2 my-1 w-100">Game Over</button>
         `;
-        match_result.innerHTML = ``;
         
+
         console.log("Game Over");
     }
 
@@ -208,15 +211,62 @@ function updateScore2(r, w, o){
 
 // function to declare the winner
 
-function decider(wicket1, wicket2, runs1, runs2){
-    if (wicket1 > 11 || wicket2 > 11) {
+function decider(w1, w2, runs1, runs2){
+    if (w1 == 11 && w2 == 11) {
         if (runs1 > runs2) {
+            match_result.innerHTML = `
+            <div>Team 1 Won! Runs: ${runs1} and Wicket: ${w1}</div>
+            `;
             return false; // returning false states game is over
         }else if (runs2 > runs1){
+            match_result.innerHTML = `
+            <div>Team 2 Won! Runs: ${runs2} and Wicket: ${w2}</div>
+            `;
+            return false;
+        }else if(runs1 == runs2){
+            match_result.innerHTML = `
+            <div>Match Resulted In Draw! Team1runs = ${runs2} and Team2runs = ${runs2}</div>
+            `;
             return false;
         }
         else{
             return true; // returning true states game is resume and not over
         }
+        
+    }else if (w1 >= 11 && w2 < 11) {
+        if (runs2 > runs1){
+            match_result.innerHTML = `
+            <div>Team 2 Won! Runs: ${runs2} and Wicket: ${w2}</div>
+            `;
+            return false;
+        }else if(runs1 == runs2){
+            match_result.innerHTML = `
+            <div>Match Resulted In Draw! Team1runs = ${runs2} and Team2runs = ${runs2}</div>
+            `;
+            return false;
+        }
+        else{
+            return true; // returning true states game is resume and not over
+        }
+        
+    }else if (w1 < 11 && w2 >= 11) {
+        if (runs1 > runs2) {
+            match_result.innerHTML = `
+            <div>Team 1 Won! Runs: ${runs1} and Wicket: ${w1}</div>
+            `;
+            return false; // returning false states game is over
+        }else if(runs1 == runs2){
+            match_result.innerHTML = `
+            <div>Match Resulted In Draw! Team1runs = ${runs2} and Team2runs = ${runs2}</div>
+            `;
+            return false;
+        }
+        else{
+            return true; // returning true states game is resume and not over
+        }
+        
+    }
+    else{
+        return true;
     }
 }
