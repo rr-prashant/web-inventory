@@ -19,7 +19,7 @@ ball.addEventListener('click', play);
 function play(){
     let gamestart = decider(wicket,wicket2,TotalRun,TotalRun2);
     if (gamestart == true) {
-        let all_score = '16O'; // score from 1-6runs W=Wideball N=Noball O=Wicket/Out
+        let all_score = '123456WNO'; // score from 1-6runs W=Wideball N=Noball O=Wicket/Out
         let bat = generateScore(all_score);
         let live1 = document.getElementById("score-image1");
         
