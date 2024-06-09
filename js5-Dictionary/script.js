@@ -76,6 +76,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 let syno = data[0].meanings[0].synonyms;
                 console.log(syno);
                 let synoss = '';
+                synoField.innerHTML = ``;
                 if (syno.length != 0){
                     synoHead.innerHTML = `<h2 class="fs-6 me-2">Synonyms:</h2><p>`;
                     
@@ -97,6 +98,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 let ano = data[0].meanings[0].antonyms;
                 console.log(ano);
                 let anoss = '';
+                anoField.innerHTML = ``;
                 if (ano.length != 0){
                     anoHead.innerHTML = `<h2 class="fs-6 me-2">Antonyms:</h2><p>`;
                     
@@ -115,13 +117,20 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
                 // For defination
                 let defi = data[0].meanings[0].definitions;
-                console.log(defi[0][0]);
+                console.log(defi[0].definition);
                 let defii= '';
+                defiField.innerHTML = ``;
                 if (defi.length != 0){
                     defiHead.innerHTML = `<h2 class="fs-6 me-2">Definitions:</h2><p>`;
                     
                     for ( let i = 0; i < defi.length; i++){
-                        defii =  `${data[0].meanings[0].definitions[i][0]}`;
+                        defii =  `${data[0].meanings[0].definitions[i].definition}`;
+                        let a = i;
+                        while (a == i){
+                            defiField.innerHTML += `-`;
+                            a++;
+                        }
+
                         defiField.innerHTML += defii;
 
                         let j = i;
