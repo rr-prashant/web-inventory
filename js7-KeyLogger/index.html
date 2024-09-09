@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            text-align: center;
+        }
+
+        .result{
+            display: flex;
+            justify-content: center;
+            font-size: 30px;
+            
+        }
+
+        .result1{
+            border-radius: 20px;
+            padding: 20px;
+
+            background-color: grey;
+            width: 300px;
+            height: 30px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Key Logger</h1>
+    <div class="main">
+        <div>
+            <button id="keyon" onclick="keyOn()">Key Logger On</button>
+            <button id="keyoff" onclick="keyOff()" disabled>Key Logger Off</button>
+        </div>
+        <div class="result" style="margin-top: 20px;">
+            <div class="result1" id="rslt1" style="margin-right: 20px;" name="" id=""> </div>
+            <div class="result1" id="rslt2" name="" id=""></div>
+        </div>
+    </div>
+
+
+    <script>
+        let but_a = document.getElementById("keyon");
+        let but_b = document.getElementById("keyoff");
+        let loggerOn = false;
+        console.log(loggerOn);
+        function keyOn(){
+            loggerOn = true;
+            but_b.disabled = false;
+            console.log("working1");
+            console.log(loggerOn);
+            
+        }
+
+        function keyOff(){
+            loggerOn = false;
+            but_b.disabled = true;
+            but_a.disabled = false;
+            reslt_1.innerText = '';
+            reslt_2.innerText = '';
+        }
+
+        let reslt_1 = document.getElementById("rslt1");
+        let reslt_2 = document.getElementById("rslt2");
+        
+
+        addEventListener("keydown", (event) => {
+            if (loggerOn == true) {
+            reslt_1.innerText = 'Key ' + event.key + ' is pressed down ';
+            reslt_2.innerText = 'Key is down';
+            console.log("working");
+        }
+        }
+            
+        );
+
+        addEventListener("keyup", (event) => {
+            if (loggerOn == true) {
+                reslt_1.innerText = 'Key ' + event.key + ' released';
+                reslt_2.innerText = 'Key is up';
+            }
+        });
+
+    </script>
+</body>
+</html>
