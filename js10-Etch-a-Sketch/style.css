@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+
+  body{
+    background-color: #02021a;
+    display: flex;
+    justify-content: space-evenly;
+    
+  }
+
+  .content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    column-gap: 10px;
+  }
+  .container {
+    display: flex;
+    align-items: center;
+    width: 960px;
+    height: 100vh;
+
+  }
+
+  .cubes{
+    background-color: #fff;
+    aspect-ratio: 1/1;
+    border: 1px solid #000;
+  }
+
